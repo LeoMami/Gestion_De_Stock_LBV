@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.com">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <title>LabelVie</title>
+  <style>
+  .hidden {
+  display: none;
+}
+        .gradient-custom-2 {
+/* fallback for old browsers */
+background: #fccb90;
+
+/* Chrome 10-25, Safari 5.1-6 */
+background: -webkit-linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+
+/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+}
+
+@media (min-width: 768px) {
+.gradient-form {
+height: 100vh !important;
+}
+}
+@media (min-width: 769px) {
+.gradient-custom-2 {
+border-top-right-radius: .3rem;
+border-bottom-right-radius: .3rem;
+}
+}
+    </style>
+</head>
+<body>
+<section class="h-100 gradient-form" style="background-color: #eee;">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-xl-10">
+        <div class="card rounded-3 text-black">
+          <div class="row g-0">
+            <!--  Demi Page Color Theme  START-->
+            <div class="col-lg-6" style="max-width: 100%; max-height: 100%;">
+              <div class="card-body p-md-5 mx-md-4">
+                <div class="text-center">
+                  <img src="http://localhost/labelvie/logolbv.png" style="width: 185px;" alt="logo">
+                  <hr style="margin-top:20px; margin-bottom:20px; ">
+                </div>
+<!--                Espace de Message-->
+                <th:block th:if="${session.msg != null && session.msg != ''}">
+                  <p id="message" class="text-center fs-5 text-success" th:text="${session.msg}"></p>
+                </th:block>
+                <!--Form Start-->
+                <form action="/createUtilisateur" method="post">
+                  <!--1-->
+                  <div class="form-outline mb-2">
+                    <label class="form-label" for="fullName">Nom & Prenom</label>
+                    <input type="text" id="fullName"  name="fullName" class="form-control"
+                           placeholder="Saisir Votre Nom et Prénom" autofocus="autofocus" required/>
+                  </div>
+                  <!--2-->
+                  <div class="form-outline mb-2">
+                    <label class="form-label" for="email">Email</label>
+                    <input type="email" id="email"  name="email" class="form-control"
+                           placeholder="Saisir votre Email" autofocus="autofocus" required/>
+                  </div>
+                  <!--3-->
+                  <div class="form-outline mb-2">
+                    <label class="form-label" for="tel">Téléphone</label>
+                    <input type="text" id="tel"  name="tel" class="form-control"
+                           placeholder="Saisir votre num Tel" autofocus="autofocus" required/>
+                  </div>
+                  <!--4-->
+                  <div class="form-outline mb-2">
+                    <label class="form-label" for="password">Mot de Passe</label>
+                    <input type="password" id="password" name="password" class="form-control"
+                           placeholder="Saisir un Mot de Passe" required />
+                  </div>
+
+                  <div class="form-outline mb-2">
+                    <label for="confirmPassword">Confirmer le mot de passe</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" class="form-control"
+                           placeholder="Confirmer votre Mot de Passe" required />
+                  </div>
+                  <!--<div class="form-outline mb-2 text-center">
+                    <button class="btn btn-primary fa-lg gradient-custom-2" type="submit">Enregistrer</button>
+                    <p class="mb-0 me-2">Vous avez un compte? <a href="/signin">Se connecter</a></p>
+                  </div>-->
+                  <div class="form-outline mb-2 text-center d-flex align-items-center justify-content-between mt-2">
+                    <button class="btn btn-primary gradient-custom-2 d-inline" type="submit">Enregistrer</button>
+                    <p class="mb-0 me-2 d-inline">Vous avez un compte? <a href="/signin">Se connecter</a></p>
+                  </div>
+
+                </form>
+              </div>
+            </div>
+            <!--  Demi Page Color Theme  START-->
+            <div class="col-lg-6 d-flex align-items-center gradient-custom-2" style="max-width: 100%; max-height: 100%;">
+              <div class="text-white px-3 py-4 p-md-5 mx-md-4">
+                <h1 class="text-center" style="font-size:5em;">
+                  #DEMAIN
+                </h1>
+                <h1 class="text-center" style="font-size:5em;">
+                  SERA
+                </h1>
+                <h1 class="text-center" style="font-size:5em;">
+                  MAROCAIN
+                </h1>
+                <p style="text-align: right;">#PourTousEtPourDemain</p>
+              </div>
+            </div>
+            <!--  Demi Page Color Theme  END-->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+  // Sélectionnez l'élément contenant le message
+  var messageElement = document.getElementById('message');
+
+  setTimeout(function() {
+    messageElement.classList.add('hidden');
+  }, 5000);
+
+    const passwordInput = document.getElementById('password');
+    const confirmPasswordInput = document.getElementById('confirmPassword');
+
+    function validatePassword() {
+        if (passwordInput.value !== confirmPasswordInput.value) {
+            confirmPasswordInput.setCustomValidity("Les mots de passe ne correspondent pas.");
+        } else {
+            confirmPasswordInput.setCustomValidity('');
+        }
+    }
+
+    passwordInput.addEventListener('input', validatePassword);
+    confirmPasswordInput.addEventListener('input', validatePassword);
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/0faddc1af8.js" crossorigin="anonymous"></script>
+</body>
+</html>
